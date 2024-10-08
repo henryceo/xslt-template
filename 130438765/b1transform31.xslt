@@ -16,6 +16,7 @@
 		<xsl:variable name="cardName" select="root/CardName"/>
 		<xsl:variable name="address" select="root/Address"/>
 		<xsl:variable name="cardCode" select="root/CardCode"/>
+		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
 			<Encabezado>
 				<Version>1.0</Version>
@@ -32,7 +33,9 @@
 						</xsl:call-template>
 					</FechaVencimientoSecuencia>
 					<IndicadorMontoGravado>0</IndicadorMontoGravado>
-					<TipoIngresos>01</TipoIngresos>
+					<TipoIngresos>	<xsl:call-template name="formatFecha">
+							<xsl:with-param name="paramCode" select="$tipoIngreso"/>
+						</xsl:call-template></TipoIngresos>
 					<TipoPago>1</TipoPago>
 					<xsl:if test="count($documentInstallments) &gt; 0">
 						<TablaFormasPago>
