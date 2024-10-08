@@ -33,7 +33,7 @@
 						</xsl:call-template>
 					</FechaVencimientoSecuencia>
 					<IndicadorMontoGravado>0</IndicadorMontoGravado>
-					<TipoIngresos>	<xsl:call-template name="formatFecha">
+					<TipoIngresos>	<xsl:call-template name="templateTipoIngreso">
 							<xsl:with-param name="paramCode" select="$tipoIngreso"/>
 						</xsl:call-template></TipoIngresos>
 					<TipoPago>1</TipoPago>
