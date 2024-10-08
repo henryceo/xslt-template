@@ -3,6 +3,7 @@
 
 	<!--<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>-->
 	<xsl:include href="130438765/template-tax-code.xslt"/>
+	<xsl:include href="130438765/template-currency.xslt"/>
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
@@ -168,6 +169,5 @@
 		<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
 		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
 	</xsl:template>
-	<!--template-tax-code.xslt-->
-	
+
 </xsl:stylesheet>
