@@ -2,8 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
 
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
-	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
-	<xsl:include href="130438765/template-currency.xslt"/>-->
+	<xsl:include href="130438765/template-tax-code.xslt"/>
+	<!--<xsl:include href="130438765/template-currency.xslt"/>-->
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
