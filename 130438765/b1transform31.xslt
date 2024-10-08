@@ -3,6 +3,7 @@
 
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
 	<xsl:include href="130438765/template-tax-code.xslt"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
 	<!--<xsl:include href="130438765/template-currency.xslt"/>-->
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
