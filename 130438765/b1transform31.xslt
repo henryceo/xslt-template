@@ -1,10 +1,11 @@
 <?xml version="1.0"  encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
-
+	
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-moneda.xslt"/>
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
-	<xsl:include href="130438765/template-currency.xslt"/>-->
+						<xsl:include href="130438765/template-currency.xslt"/>-->
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
@@ -106,17 +107,21 @@
 					</MontoTotal>
 				</Totales>
 				<OtraMoneda>
-						<!--validar los valores tomado del documento-->
-						<TipoMoneda><xsl:value-of select="$root/DocCurrency"/></TipoMoneda>
-						<TipoCambio><xsl:value-of select="$root/DocRate"/></TipoCambio>
-						<MontoGravadoTotalOtraMoneda>200.00</MontoGravadoTotalOtraMoneda>
-						<MontoGravado1OtraMoneda>200.00</MontoGravado1OtraMoneda>
-						<MontoExentoOtraMoneda>464.00</MontoExentoOtraMoneda>
-						<TotalITBISOtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBISOtraMoneda>
-						<TotalITBIS1OtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBIS1OtraMoneda>
-						<MontoTotalOtraMoneda><xsl:value-of select="$root/DocTotalFc"/></MontoTotalOtraMoneda>
-						<!--validar los valores tomado del documento-->
-					</OtraMoneda>
+					<!--validar los valores tomado del documento-->
+					<TipoMoneda>
+						<xsl:call-template name="templateTipoModena">
+							<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
+						</xsl:call-template>
+					</TipoMoneda>
+					<TipoCambio><xsl:value-of select="$root/DocRate"/></TipoCambio>
+					<MontoGravadoTotalOtraMoneda>200.00</MontoGravadoTotalOtraMoneda>
+					<MontoGravado1OtraMoneda>200.00</MontoGravado1OtraMoneda>
+					<MontoExentoOtraMoneda>464.00</MontoExentoOtraMoneda>
+					<TotalITBISOtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBISOtraMoneda>
+					<TotalITBIS1OtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBIS1OtraMoneda>
+					<MontoTotalOtraMoneda><xsl:value-of select="$root/DocTotalFc"/></MontoTotalOtraMoneda>
+					<!--validar los valores tomado del documento-->
+				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
 			<DetallesItems>
@@ -173,5 +178,5 @@
 		<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
 		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
 	</xsl:template>
-
+	
 </xsl:stylesheet>
