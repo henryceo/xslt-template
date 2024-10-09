@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 	<xsl:template name="templateTipoIngreso">
 		<xsl:param name="paramCode"/>
-            <xsl:variable name="taxs">
+            <xsl:variable name="codes">
                 <codes>
                     <code>
                         <id>oInvoices</id>
