@@ -7,7 +7,17 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
-	<xsl:param name="emisorRNC"/>
+	
+	<xsl:param name="paramEmisorRNCEmisor"/>
+	<xsl:param name="paramEmisorRazonSocialEmisor"/>
+	<xsl:param name="paramEmisorNombreComercial"/>
+	<xsl:param name="paramEmisorSucursal"/>
+	<xsl:param name="paramEmisorDireccionEmisor"/>
+	<xsl:param name="paramEmisorMunicipio"/>
+	<xsl:param name="paramEmisorProvincia"/>
+	<xsl:param name="paramEmisorCorreoEmisor"/>
+	<xsl:param name="paramEmisorWebSite"/>
+	
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
@@ -56,16 +66,21 @@
 				</IdDoc>
 				<Emisor>
 					<xsl:call-template name="templateEmisor">
-					<!-- validar de donde se tomara la sucursal -->
-						<xsl:with-param name="paramSucursal">PRINCIPAL</xsl:with-param>
-						<xsl:with-param name="paramRNCEmisor"><xsl:value-of select="$emisorRNC"/></xsl:with-param>
 						
-						<xsl:with-param name="paramDocNum" select="$docNum"/>
-						<xsl:with-param name="paramDocDate">
+						<xsl:with-param name="paramRNCEmisor" select="$paramEmisorRNCEmisor"/>
+						<xsl:with-param name="paramRazonSocialEmisor" select="$paramEmisorRazonSocialEmisor"/>
+						<xsl:with-param name="paramNombreComercial" select="$paramEmisorNombreComercial"/>
+						<xsl:with-param name="paramSucursal" select="$paramEmisorSucursal"/>
+						<xsl:with-param name="paramDireccionEmisor" select="$paramEmisorDireccionEmisor"/>
+						<xsl:with-param name="paramMunicipio" select="$paramEmisorMunicipio"/>
+						<xsl:with-param name="paramProvincia" select="$paramEmisorProvincia"/>
+						<xsl:with-param name="paramCorreoEmisor" select="$paramEmisorCorreoEmisor"/>
+						<xsl:with-param name="paramWebSite" select="$paramEmisorWebSite"/>
+						<xsl:with-param name="paramNumeroFacturaInterna" select="$docNum"/>
+						<xsl:with-param name="paramFechaEmision">
 							<xsl:call-template name="formatFecha">
 								<xsl:with-param name="fechaISO" select="$docDate"/>
-							</xsl:call-template>
-						</xsl:with-param>
+							</xsl:call-template></xsl:with-param>
 					</xsl:call-template>
 				</Emisor>
 				<Comprador>
