@@ -7,6 +7,7 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
+	<xsl:param name="emisorRNC"/>
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
@@ -55,7 +56,10 @@
 				</IdDoc>
 				<Emisor>
 					<xsl:call-template name="templateEmisor">
+					<!-- validar de donde se tomara la sucursal -->
 						<xsl:with-param name="paramSucursal">PRINCIPAL</xsl:with-param>
+						<xsl:with-param name="paramRNCEmisor"><xsl:value-of select="$emisorRNC"/></xsl:with-param>
+						
 						<xsl:with-param name="paramDocNum" select="$docNum"/>
 						<xsl:with-param name="paramDocDate">
 							<xsl:call-template name="formatFecha">

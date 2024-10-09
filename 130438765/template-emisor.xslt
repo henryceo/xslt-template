@@ -4,8 +4,9 @@
         <xsl:param name="paramDocNum"/>
         <xsl:param name="paramDocDate"/>
         <xsl:param name="paramSucursal"/>
+        <xsl:param name="paramRNCEmisor"/>
         <!--validar datos emisor: de donde se tomaran estos datos faltante-->
-        <RNCEmisor>130438765</RNCEmisor>
+        <RNCEmisor><xsl:value-of select="$paramRNCEmisor"/></RNCEmisor>
         <RazonSocialEmisor>CEO CONSULTORIA SRL</RazonSocialEmisor>
         <NombreComercial>CEO CONSULTORIA SRL</NombreComercial>
         <Sucursal><xsl:value-of select="$paramSucursal"/></Sucursal>
