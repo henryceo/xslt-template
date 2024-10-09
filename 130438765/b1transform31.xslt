@@ -4,6 +4,7 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-moneda.xslt"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
 	<xsl:template match="/">
@@ -53,25 +54,15 @@
 					</xsl:if>
 				</IdDoc>
 				<Emisor>
-					<!--validar datos emisor: de donde se tomaran estos datos faltante-->
-					<RNCEmisor>130438765</RNCEmisor>
-					<RazonSocialEmisor>CEO CONSULTORIA SRL</RazonSocialEmisor>
-					<NombreComercial>CEO CONSULTORIA SRL</NombreComercial>
-					<Sucursal>PRINCIPAL</Sucursal>
-					<DireccionEmisor>Fantino Falco</DireccionEmisor>
-					<Municipio>020100</Municipio>
-					<Provincia>020000</Provincia>
-					<CorreoEmisor>contabilidad@ceo.do</CorreoEmisor>
-					<WebSite>www.ceo.do</WebSite>
-					<!--validar datos emisor: de donde se tomaran estos datos faltante-->
-					<NumeroFacturaInterna>
-						<xsl:value-of select="$docNum"/>
-					</NumeroFacturaInterna>
-					<FechaEmision>
-						<xsl:call-template name="formatFecha">
-							<xsl:with-param name="fechaISO" select="$docDate"/>
-						</xsl:call-template>
-					</FechaEmision>
+					<xsl:call-template name="templateEmisor">
+						<xsl:with-param name="paramSucursal">PRINCIPAL</xsl:with-param>
+						<xsl:with-param name="paramDocNum" select="$docNum"/>
+						<xsl:with-param name="paramDocDate">
+							<xsl:call-template name="formatFecha">
+								<xsl:with-param name="fechaISO" select="$docDate"/>
+							</xsl:call-template>
+						</xsl:with-param>
+					</xsl:call-template>
 				</Emisor>
 				<Comprador>
 					<RNCComprador>
