@@ -31,6 +31,8 @@
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
+		<xsl:copy-of select="$paramEmisorWebSite"/>
+		<xsl:copy-of select="$emisor"/>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
