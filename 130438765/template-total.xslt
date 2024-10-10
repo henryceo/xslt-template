@@ -30,7 +30,7 @@
 		
 
 		<xsl:for-each select="msxsl:node-set($taxs)/TaxCode">
-			<xsl:element name="tag">
+			<xsl:element name="{tag}">
 				<xsl:value-of select="tasa"/>
 			</xsl:element>
 		</xsl:for-each>
