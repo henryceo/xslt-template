@@ -5,6 +5,7 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-moneda.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
 	
@@ -103,22 +104,9 @@
 				</Comprador>
 				<!--validar los valores tomado del documento-->
 				<Totales>
-					<!--faltan los totales-->
-					<MontoGravadoTotal>11987.04</MontoGravadoTotal>
-					<MontoGravadoI1>11987.04</MontoGravadoI1>
-					<MontoExento>27809.94</MontoExento>
-					<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
-					<ITBIS1>18</ITBIS1>
-					<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
-					<TotalITBIS>
-						<xsl:value-of select="$root/VatSum"/>
-					</TotalITBIS>
-					<TotalITBIS1>
-						<xsl:value-of select="$root/VatSum"/>
-					</TotalITBIS1>
-					<MontoTotal>
-						<xsl:value-of select="$root/DocTotal"/>
-					</MontoTotal>
+					<xsl:call-template name="templateTotal">
+						<xsl:with-param name="paramItems" select="$root/DocumentLines"/>
+					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
 					<!--validar los valores tomado del documento-->
