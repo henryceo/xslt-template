@@ -34,7 +34,7 @@
 				<xsl:value-of select="tasa"/>
 			</xsl:element>
 		</xsl:for-each>
-				
+				<xsl:copy-of select=""/>
 			
 		
 		<!--
