@@ -181,5 +181,5 @@
 		<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
 		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
 	</xsl:template>
-	
+	<!-- templateTotal -->
 </xsl:stylesheet>
