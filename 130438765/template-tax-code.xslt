@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
 	<xsl:template name="taxType">
 		<xsl:param name="taxCode"/>
-		<xsl:param name="taxCampo"/>
+		<xsl:param name="taxField"/>
 		<xsl:variable name="taxs">
 			<TaxCode>
 				<tax>
@@ -17,6 +17,6 @@
 				</tax>
 			</TaxCode>
 		</xsl:variable>
-		<xsl:value-of select="msxsl:node-set($taxs)/TaxCode/tax[id=$taxCode]/$taxCampo"/>
+		<xsl:value-of select="msxsl:node-set($taxs)/TaxCode/tax[id=$taxCode]/$taxField"/>
 	</xsl:template>
 </xsl:stylesheet>
