@@ -157,7 +157,7 @@
 							<!--validar proceso de mapeo de coaidos de impuesto-->
 							<xsl:call-template name="taxType">
 								<xsl:with-param name="taxCode" select="TaxCode"/>
-								<xsl:with-param name="taxCampo" select="value"/>
+								<xsl:with-param name="taxField" select="value"/>
 							</xsl:call-template>
 						</IndicadorFacturacion>
 						<NombreItem>
