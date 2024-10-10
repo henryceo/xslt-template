@@ -143,7 +143,7 @@
 						</NumeroLinea>
 						<TablaCodigosItem>
 							<CodigosItem>
-								<!--validar campo TipoCodigo-->`
+								<!--validar campo TipoCodigo-->
 								<TipoCodigo>INTERNA</TipoCodigo>
 								<CodigoItem>
 									<xsl:value-of select="ItemCode"/>
