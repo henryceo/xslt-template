@@ -17,176 +17,181 @@
 	<xsl:param name="paramEmisorProvincia"/>
 	<xsl:param name="paramEmisorCorreoEmisor"/>
 	<xsl:param name="paramEmisorWebSite"/>
-		
-		<xsl:template match="/">
-			<xsl:variable name="root" select="root"/>
-			<xsl:variable name="tipoeCF" select="root/U_NCF"/>
-			<xsl:variable name="ncfValidoHasta" select="root/U_NCF_ValidoHasta"/>
-			<xsl:variable name="documentInstallments" select="root/DocumentInstallments/DocumentInstallment"/>
-			<xsl:variable name="docNum" select="root/DocNum"/>
-			<xsl:variable name="docDate" select="root/DocDate"/>
-			<xsl:variable name="federalTaxID" select="root/FederalTaxID"/>
-			<xsl:variable name="cardName" select="root/CardName"/>
-			<xsl:variable name="address" select="root/Address"/>
-			<xsl:variable name="cardCode" select="root/CardCode"/>
-			<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
-			<ECF>
-				<Encabezado>
-					<Version>1.0</Version>
-					<IdDoc>
-						<TipoeCF>
-							<xsl:value-of select="substring($tipoeCF,2,2)"/>
-						</TipoeCF>
-						<eNCF>
-							<xsl:value-of select="$tipoeCF"/>
-						</eNCF>
-						<FechaVencimientoSecuencia>
-							<xsl:call-template name="formatFecha">
-								<xsl:with-param name="fechaISO" select="$ncfValidoHasta"/>
-							</xsl:call-template>
-						</FechaVencimientoSecuencia>
-						<IndicadorMontoGravado>0</IndicadorMontoGravado>
-						<TipoIngresos>	<xsl:call-template name="templateTipoIngreso">
-								<xsl:with-param name="paramCode" select="$tipoIngreso"/>
-							</xsl:call-template></TipoIngresos>
-						<TipoPago>1</TipoPago>
-						<xsl:if test="count($documentInstallments) &gt; 0">
-							<TablaFormasPago>
-								<xsl:for-each select="$documentInstallments">
-									<FormaDePago>
-										<!--validar FormaPago-->
-										<FormaPago>4</FormaPago>
-										<MontoPago>
-											<xsl:value-of select="Total"/>
-										</MontoPago>
-									</FormaDePago>
-								</xsl:for-each>
-							</TablaFormasPago>
-						</xsl:if>
-					</IdDoc>
-					<Emisor>
-						<xsl:call-template name="templateEmisor">
-							
-							<xsl:with-param name="paramRNCEmisor" select="$paramEmisorRNCEmisor"/>
-							<xsl:with-param name="paramRazonSocialEmisor" select="$paramEmisorRazonSocialEmisor"/>
-							<xsl:with-param name="paramNombreComercial" select="$paramEmisorNombreComercial"/>
-							<xsl:with-param name="paramSucursal" select="$paramEmisorSucursal"/>
-							<xsl:with-param name="paramDireccionEmisor" select="$paramEmisorDireccionEmisor"/>
-							<xsl:with-param name="paramMunicipio" select="$paramEmisorMunicipio"/>
-							<xsl:with-param name="paramProvincia" select="$paramEmisorProvincia"/>
-							<xsl:with-param name="paramCorreoEmisor" select="$paramEmisorCorreoEmisor"/>
-							<xsl:with-param name="paramWebSite" select="$paramEmisorWebSite"/>
-							<xsl:with-param name="paramNumeroFacturaInterna" select="$docNum"/>
-							<xsl:with-param name="paramFechaEmision">
-								<xsl:call-template name="formatFecha">
-									<xsl:with-param name="fechaISO" select="$docDate"/>
-								</xsl:call-template></xsl:with-param>
+	
+	<xsl:template match="/">
+		<xsl:variable name="root" select="root"/>
+		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
+		<xsl:variable name="ncfValidoHasta" select="root/U_NCF_ValidoHasta"/>
+		<xsl:variable name="documentInstallments" select="root/DocumentInstallments/DocumentInstallment"/>
+		<xsl:variable name="docNum" select="root/DocNum"/>
+		<xsl:variable name="docDate" select="root/DocDate"/>
+		<xsl:variable name="federalTaxID" select="root/FederalTaxID"/>
+		<xsl:variable name="cardName" select="root/CardName"/>
+		<xsl:variable name="address" select="root/Address"/>
+		<xsl:variable name="cardCode" select="root/CardCode"/>
+		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
+		<ECF>
+			<Encabezado>
+				<Version>1.0</Version>
+				<IdDoc>
+					<TipoeCF>
+						<xsl:value-of select="substring($tipoeCF,2,2)"/>
+					</TipoeCF>
+					<eNCF>
+						<xsl:value-of select="$tipoeCF"/>
+					</eNCF>
+					<FechaVencimientoSecuencia>
+						<xsl:call-template name="formatFecha">
+							<xsl:with-param name="fechaISO" select="$ncfValidoHasta"/>
 						</xsl:call-template>
-					</Emisor>
-					<Comprador>
-						<RNCComprador>
-							<xsl:value-of select="$federalTaxID"/>
-						</RNCComprador>
-						<RazonSocialComprador>
-							<xsl:value-of select="$cardName"/>
-						</RazonSocialComprador>
-						<DireccionComprador>
-							<xsl:value-of select="$address"/>
-						</DireccionComprador>
-						<CodigoInternoComprador>
-							<xsl:value-of select="$cardCode"/>
-						</CodigoInternoComprador>
-					</Comprador>
+					</FechaVencimientoSecuencia>
+					<IndicadorMontoGravado>0</IndicadorMontoGravado>
+					<TipoIngresos>	
+						<xsl:call-template name="templateTipoIngreso">
+							<xsl:with-param name="paramCode" select="$tipoIngreso"/>
+						</xsl:call-template>
+					</TipoIngresos>
+					<!-- TODO -->
+					<TipoPago>1</TipoPago>
+					<!-- TODO -->
+					<xsl:if test="count($documentInstallments) &gt; 0">
+						<TablaFormasPago>
+							<xsl:for-each select="$documentInstallments">
+								<FormaDePago>
+									<!-- TODO -->
+									<FormaPago>4</FormaPago>
+									<MontoPago>
+										<xsl:value-of select="Total"/>
+									</MontoPago>
+								</FormaDePago>
+							</xsl:for-each>
+						</TablaFormasPago>
+					</xsl:if>
+				</IdDoc>
+				<Emisor>
+					<xsl:call-template name="templateEmisor">
+						
+						<xsl:with-param name="paramRNCEmisor" select="$paramEmisorRNCEmisor"/>
+						<xsl:with-param name="paramRazonSocialEmisor" select="$paramEmisorRazonSocialEmisor"/>
+						<xsl:with-param name="paramNombreComercial" select="$paramEmisorNombreComercial"/>
+						<xsl:with-param name="paramSucursal" select="$paramEmisorSucursal"/>
+						<xsl:with-param name="paramDireccionEmisor" select="$paramEmisorDireccionEmisor"/>
+						<xsl:with-param name="paramMunicipio" select="$paramEmisorMunicipio"/>
+						<xsl:with-param name="paramProvincia" select="$paramEmisorProvincia"/>
+						<xsl:with-param name="paramCorreoEmisor" select="$paramEmisorCorreoEmisor"/>
+						<xsl:with-param name="paramWebSite" select="$paramEmisorWebSite"/>
+						<xsl:with-param name="paramNumeroFacturaInterna" select="$docNum"/>
+						<xsl:with-param name="paramFechaEmision">
+							<xsl:call-template name="formatFecha">
+								<xsl:with-param name="fechaISO" select="$docDate"/>
+							</xsl:call-template></xsl:with-param>
+					</xsl:call-template>
+				</Emisor>
+				<Comprador>
+					<RNCComprador>
+						<xsl:value-of select="$federalTaxID"/>
+					</RNCComprador>
+					<RazonSocialComprador>
+						<xsl:value-of select="$cardName"/>
+					</RazonSocialComprador>
+					<DireccionComprador>
+						<xsl:value-of select="$address"/>
+					</DireccionComprador>
+					<CodigoInternoComprador>
+						<xsl:value-of select="$cardCode"/>
+					</CodigoInternoComprador>
+				</Comprador>
+				<!--validar los valores tomado del documento-->
+				<Totales>
+					<!--faltan los totales-->
+					<MontoGravadoTotal>11987.04</MontoGravadoTotal>
+					<MontoGravadoI1>11987.04</MontoGravadoI1>
+					<MontoExento>27809.94</MontoExento>
+					<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
+					<ITBIS1>18</ITBIS1>
+					<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
+					<TotalITBIS>
+						<xsl:value-of select="$root/VatSum"/>
+					</TotalITBIS>
+					<TotalITBIS1>
+						<xsl:value-of select="$root/VatSum"/>
+					</TotalITBIS1>
+					<MontoTotal>
+						<xsl:value-of select="$root/DocTotal"/>
+					</MontoTotal>
+				</Totales>
+				<OtraMoneda>
 					<!--validar los valores tomado del documento-->
-					<Totales>
-						<!--faltan los totales-->
-						<MontoGravadoTotal>11987.04</MontoGravadoTotal>
-						<MontoGravadoI1>11987.04</MontoGravadoI1>
-						<MontoExento>27809.94</MontoExento>
-						<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
-						<ITBIS1>18</ITBIS1>
-						<!--aplicar logica de como tomar los valores clasrificado por tasa impositiva-->
-						<TotalITBIS>
-							<xsl:value-of select="$root/VatSum"/>
-						</TotalITBIS>
-						<TotalITBIS1>
-							<xsl:value-of select="$root/VatSum"/>
-						</TotalITBIS1>
-						<MontoTotal>
-							<xsl:value-of select="$root/DocTotal"/>
-						</MontoTotal>
-					</Totales>
-					<OtraMoneda>
-						<!--validar los valores tomado del documento-->
-						<TipoMoneda>
-							<xsl:call-template name="templateTipoModena">
-								<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
+					<TipoMoneda>
+						<xsl:call-template name="templateTipoModena">
+							<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
+						</xsl:call-template>
+					</TipoMoneda>
+					<TipoCambio><xsl:value-of select="$root/DocRate"/></TipoCambio>
+					<MontoGravadoTotalOtraMoneda>200.00</MontoGravadoTotalOtraMoneda>
+					<MontoGravado1OtraMoneda>200.00</MontoGravado1OtraMoneda>
+					<MontoExentoOtraMoneda>464.00</MontoExentoOtraMoneda>
+					<TotalITBISOtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBISOtraMoneda>
+					<TotalITBIS1OtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBIS1OtraMoneda>
+					<MontoTotalOtraMoneda><xsl:value-of select="$root/DocTotalFc"/></MontoTotalOtraMoneda>
+					<!--validar los valores tomado del documento-->
+				</OtraMoneda>
+				<!--validar los valores tomado del documento-->
+			</Encabezado>
+			<DetallesItems>
+				<xsl:for-each select="$root/DocumentLines/DocumentLine">
+					<Item>
+						<NumeroLinea>
+							<xsl:value-of select="(LineNum) + 1"/>
+						</NumeroLinea>
+						<TablaCodigosItem>
+							<CodigosItem>
+								<!--validar campo TipoCodigo-->`
+								<TipoCodigo>INTERNA</TipoCodigo>
+								<CodigoItem>
+									<xsl:value-of select="ItemCode"/>
+								</CodigoItem>
+							</CodigosItem>
+						</TablaCodigosItem>
+						<IndicadorFacturacion>
+							<!--validar proceso de mapeo de coaidos de impuesto-->
+							<xsl:call-template name="taxType">
+								<xsl:with-param name="taxCode" select="TaxCode"/>
+								<xsl:with-param name="taxCampo" select="value"/>
 							</xsl:call-template>
-						</TipoMoneda>
-						<TipoCambio><xsl:value-of select="$root/DocRate"/></TipoCambio>
-						<MontoGravadoTotalOtraMoneda>200.00</MontoGravadoTotalOtraMoneda>
-						<MontoGravado1OtraMoneda>200.00</MontoGravado1OtraMoneda>
-						<MontoExentoOtraMoneda>464.00</MontoExentoOtraMoneda>
-						<TotalITBISOtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBISOtraMoneda>
-						<TotalITBIS1OtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBIS1OtraMoneda>
-						<MontoTotalOtraMoneda><xsl:value-of select="$root/DocTotalFc"/></MontoTotalOtraMoneda>
-						<!--validar los valores tomado del documento-->
-					</OtraMoneda>
-					<!--validar los valores tomado del documento-->
-				</Encabezado>
-				<DetallesItems>
-					<xsl:for-each select="$root/DocumentLines/DocumentLine">
-						<Item>
-							<NumeroLinea>
-								<xsl:value-of select="(LineNum) + 1"/>
-							</NumeroLinea>
-							<TablaCodigosItem>
-								<CodigosItem>
-									<!--validar campo TipoCodigo-->
-									<TipoCodigo>INTERNA</TipoCodigo>
-									<CodigoItem>
-										<xsl:value-of select="ItemCode"/>
-									</CodigoItem>
-								</CodigosItem>
-							</TablaCodigosItem>
-							<IndicadorFacturacion>
-								<!--validar proceso de mapeo de coaidos de impuesto-->
-								<xsl:call-template name="taxType">
-									<xsl:with-param name="taxCode" select="TaxCode"/>
-								</xsl:call-template>
-							</IndicadorFacturacion>
-							<NombreItem>
-								<xsl:value-of select="ItemDescription"/>
-							</NombreItem>
-							<IndicadorBienoServicio>2</IndicadorBienoServicio>
-							<CantidadItem>
-								<xsl:value-of select="Quantity"/>
-							</CantidadItem>
-							<PrecioUnitarioItem>
-								<xsl:value-of select="LineTotal div Quantity"/>
-							</PrecioUnitarioItem>
-							<OtraMonedaDetalle>
-								<PrecioOtraMoneda>
-									<xsl:value-of select="UnitPrice"/>
-								</PrecioOtraMoneda>
-								<MontoItemOtraMoneda>
-									<xsl:value-of select="RowTotalFC"/>
-								</MontoItemOtraMoneda>
-							</OtraMonedaDetalle>
-							<MontoItem>
-								<xsl:value-of select="LineTotal"/>
-							</MontoItem>
-						</Item>
-					</xsl:for-each>
-				</DetallesItems>
-			</ECF>
-		</xsl:template>
-		<xsl:template name="formatFecha">
-			<xsl:param name="fechaISO"/>
-			<xsl:variable name="anio" select="substring($fechaISO, 1, 4)"/>
-			<xsl:variable name="mes" select="substring($fechaISO, 6, 2)"/>
-			<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
-			<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
-		</xsl:template>
-		
-	</xsl:stylesheet>
+						</IndicadorFacturacion>
+						<NombreItem>
+							<xsl:value-of select="ItemDescription"/>
+						</NombreItem>
+						<IndicadorBienoServicio>2</IndicadorBienoServicio>
+						<CantidadItem>
+							<xsl:value-of select="Quantity"/>
+						</CantidadItem>
+						<PrecioUnitarioItem>
+							<xsl:value-of select="LineTotal div Quantity"/>
+						</PrecioUnitarioItem>
+						<OtraMonedaDetalle>
+							<PrecioOtraMoneda>
+								<xsl:value-of select="UnitPrice"/>
+							</PrecioOtraMoneda>
+							<MontoItemOtraMoneda>
+								<xsl:value-of select="RowTotalFC"/>
+							</MontoItemOtraMoneda>
+						</OtraMonedaDetalle>
+						<MontoItem>
+							<xsl:value-of select="LineTotal"/>
+						</MontoItem>
+					</Item>
+				</xsl:for-each>
+			</DetallesItems>
+		</ECF>
+	</xsl:template>
+	<xsl:template name="formatFecha">
+		<xsl:param name="fechaISO"/>
+		<xsl:variable name="anio" select="substring($fechaISO, 1, 4)"/>
+		<xsl:variable name="mes" select="substring($fechaISO, 6, 2)"/>
+		<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
+		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
+	</xsl:template>
+	
+</xsl:stylesheet>
