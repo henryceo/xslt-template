@@ -17,6 +17,6 @@
 				</tax>
 			</TaxCode>
 		</xsl:variable>
-		<xsl:value-of select="msxsl:node-set($taxs)/TaxCode/tax[id=$taxCode]/$taxField"/>
+		<xsl:value-of select="msxsl:node-set($taxs)/TaxCode/tax[id=$taxCode]/[$taxField]"/>
 	</xsl:template>
 </xsl:stylesheet>
