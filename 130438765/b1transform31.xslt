@@ -104,18 +104,9 @@
 				</Comprador>
 				<!--validar los valores tomado del documento-->
 				<Totales>
-					<MontoGravadoTotal>11987.04</MontoGravadoTotal>
-							<MontoGravadoI1>11987.04</MontoGravadoI1>
-							<MontoExento>27809.94</MontoExento>
-							<ITBIS1>18</ITBIS1>
-							<TotalITBIS>2157.67</TotalITBIS>
-							<TotalITBIS1>2157.67</TotalITBIS1>
-							<MontoTotal>41954.65</MontoTotal>
-				<!--
-
 					<xsl:call-template name="templateTotal">
 						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
-					</xsl:call-template>-->
+					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
 					<!--validar los valores tomado del documento-->
@@ -143,7 +134,7 @@
 						</NumeroLinea>
 						<TablaCodigosItem>
 							<CodigosItem>
-								<!--validar campo TipoCodigo-->
+								<!--validar campo TipoCodigo-->`
 								<TipoCodigo>INTERNA</TipoCodigo>
 								<CodigoItem>
 									<xsl:value-of select="ItemCode"/>
