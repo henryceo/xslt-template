@@ -105,7 +105,7 @@
 				<!--validar los valores tomado del documento-->
 				<Totales>
 					<xsl:call-template name="templateTotal">
-						<xsl:with-param name="paramItems" select="$root/DocumentLines"/>
+						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
 					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
