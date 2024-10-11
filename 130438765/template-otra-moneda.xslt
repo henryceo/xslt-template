@@ -41,8 +41,8 @@
 			</TaxCode>
 		</xsl:variable>
 
-	    <TipoCambio><xsl:value-of select="$paramDocCurrency"/></TipoCambio>
-	    <TipoMoneda><xsl:value-of select="$paramDocRate"/></TipoMoneda>
+	    <TipoMoneda><xsl:value-of select="$paramDocCurrency"/></TipoMoneda>
+	    <TipoCambio><xsl:value-of select="$paramDocRate"/></TipoCambio>
         <MontoGravadoTotalOtraMoneda><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxLiable='tYES']/RowTotalFC)"/></MontoGravadoTotalOtraMoneda>
         <MontoGravado1OtraMoneda><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxLiable='tYES']/RowTotalFC)"/></MontoGravado1OtraMoneda>
         <MontoExentoOtraMoneda><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxLiable='tNO']/RowTotalFC)"/></MontoExentoOtraMoneda>
