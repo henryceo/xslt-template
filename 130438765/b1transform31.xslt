@@ -6,6 +6,8 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-moneda.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-otra-moneda.xslt"/>
+
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
 	
@@ -111,20 +113,17 @@
 					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
-					<!--validar los valores tomado del documento-->
-					<TipoMoneda>
-						<xsl:call-template name="templateTipoModena">
-							<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
-						</xsl:call-template>
-					</TipoMoneda>
-					<TipoCambio><xsl:value-of select="$root/DocRate"/></TipoCambio>
-					<MontoGravadoTotalOtraMoneda>200.00</MontoGravadoTotalOtraMoneda>
-					<MontoGravado1OtraMoneda>200.00</MontoGravado1OtraMoneda>
-					<MontoExentoOtraMoneda>464.00</MontoExentoOtraMoneda>
-					<TotalITBISOtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBISOtraMoneda>
-					<TotalITBIS1OtraMoneda><xsl:value-of select="$root/VatSumFc"/></TotalITBIS1OtraMoneda>
-					<MontoTotalOtraMoneda><xsl:value-of select="$root/DocTotalFc"/></MontoTotalOtraMoneda>
-					<!--validar los valores tomado del documento-->
+				<xsl:call-template name="templateOtraMoneda">
+						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
+						<xsl:with-param name="paramDocRate" select="$root/DocRate"/>
+						<xsl:with-param name="paramDocCurrency">
+							<xsl:call-template name="templateTipoMoneda">
+								<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
+							</xsl:call-template>
+						</xsl:with-param>
+						<xsl:with-param name="paramVatSumFc" select="$root/VatSumFc"/>
+						<xsl:with-param name="paramDocTotalFc" select="$root/DocTotalFc"/>
+					</xsl:call-template>
 				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
