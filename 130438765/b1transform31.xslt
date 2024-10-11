@@ -106,6 +106,8 @@
 				<Totales>
 					<xsl:call-template name="templateTotal">
 						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
+						<xsl:with-param name="paramDocTotal" select="$root/DocTotal"/>
+						<xsl:with-param name="paramVatSum" select="$root/VatSum"/>
 					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
