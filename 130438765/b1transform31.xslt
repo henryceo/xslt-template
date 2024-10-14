@@ -7,11 +7,22 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-otra-moneda.xslt"/>
-	
-	<!--<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
-	<xsl:include href="130438765/template-tax-code.xslt"/>
+	<!--<xsl:include href="mapeo-test.xml"/>
+	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
+						<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
-	
+	<data>
+		<codes>
+			<code>
+				<id>EUR</id>
+				<value>EUR</value>
+			</code>
+			<code>
+				<id>USD</id>
+				<value>USD</value>
+			</code>
+		</codes>
+	</data>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
@@ -21,7 +32,6 @@
 	<xsl:param name="paramEmisorProvincia"/>
 	<xsl:param name="paramEmisorCorreoEmisor"/>
 	<xsl:param name="paramEmisorWebSite"/>
-	<xsl:param name="paramMapTaxCodes"/>
 	
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
@@ -36,8 +46,8 @@
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
-		<!-- <xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/> -->
-		<xsl:copy-of select="$paramMapTaxCodes"/>
+			<!-- <xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/> -->
+			<xsl:copy-of select="$paramMapTaxCodes"/>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
@@ -117,7 +127,7 @@
 					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
-				<xsl:call-template name="templateOtraMoneda">
+					<xsl:call-template name="templateOtraMoneda">
 						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
 						<xsl:with-param name="paramDocRate" select="$root/DocRate"/>
 						<xsl:with-param name="paramDocCurrency">
@@ -187,8 +197,7 @@
 		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
 	</xsl:template>
 	<!-- templateTotal -->
-
+	
 	<xsl:template name="data">
-			
 	</xsl:template>
 </xsl:stylesheet>
