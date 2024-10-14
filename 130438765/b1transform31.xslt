@@ -26,7 +26,7 @@
 			</codes>
 		</data>
 	</ceo:codes>
-	 <xsl:variable name="vpDoc1" select="document('')/*/ceo:codes"/>
+	 <xsl:variable name="vpDoc1" select="ceo:codes"/>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
