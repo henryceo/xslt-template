@@ -35,6 +35,7 @@
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
+		<xsl:copy-of select="document(https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml)"/>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
