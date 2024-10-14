@@ -13,7 +13,7 @@
 						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
 						<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
-
+	
 	<xsl:variable name="vpDoc1" select="msxsl:node-set($vrtfvpDoc1)"/>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
@@ -24,7 +24,15 @@
 	<xsl:param name="paramEmisorProvincia"/>
 	<xsl:param name="paramEmisorCorreoEmisor"/>
 	<xsl:param name="paramEmisorWebSite"/>
-	
+	<xml id="book_catalog">
+		<catalog>hola mundo</catalog>
+	</xml>
+	<xsl:template match="catalog">
+		<table class="catalog_table">
+			<xsl:copy-of select="/"/>
+		</table>
+		
+	</xsl:template>
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
