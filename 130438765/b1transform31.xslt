@@ -1,5 +1,5 @@
 <?xml version="1.0"  encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:ceo="urn:schemas-ceo-com:xslt" xmlns:my="my:my" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
 	
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
@@ -8,21 +8,24 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-otra-moneda.xslt"/>
 	<!--<xsl:include href="mapeo-test.xml"/>
-	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
+						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
 						<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
-	<data>
-		<codes>
-			<code>
-				<id>EUR</id>
-				<value>EUR</value>
-			</code>
-			<code>
-				<id>USD</id>
-				<value>USD</value>
-			</code>
-		</codes>
-	</data>
+
+	<ceo:codes>
+		<data>
+			<codes>
+				<code>
+					<id>EUR</id>
+					<value>EUR</value>
+				</code>
+				<code>
+					<id>USD</id>
+					<value>USD</value>
+				</code>
+			</codes>
+		</data>
+	</ceo:codes>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
@@ -47,7 +50,8 @@
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
 			<!-- <xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/> -->
-			<xsl:copy-of select="$paramMapTaxCodes"/>
+			<xsl:copy-of select="ceo:codes"/>
+			
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
