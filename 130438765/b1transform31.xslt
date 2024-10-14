@@ -13,23 +13,6 @@
 						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
 						<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
-  <xsl:variable name="vrtfvpDoc1">
-       <ceo:codes>
-		<data>
-			<codes>
-				<code>
-					<id>EUR</id>
-					<value>EUR</value>
-				</code>
-				<code>
-					<id>USD</id>
-					<value>USD</value>
-				</code>
-			</codes>
-		</data>
-	</ceo:codes>
-    </xsl:variable>
-	
 
 	<xsl:variable name="vpDoc1" select="msxsl:node-set($vrtfvpDoc1)"/>
 	<xsl:param name="paramEmisorRNCEmisor"/>
