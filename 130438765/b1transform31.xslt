@@ -7,6 +7,9 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-otra-moneda.xslt"/>
+	<maps>
+		<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xslt"/>
+	</maps>
 
 	<!--<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
@@ -34,6 +37,7 @@
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
+			<xsl:copy-of select="maps/codes"/>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
