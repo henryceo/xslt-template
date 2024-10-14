@@ -21,6 +21,7 @@
 	<xsl:param name="paramEmisorProvincia"/>
 	<xsl:param name="paramEmisorCorreoEmisor"/>
 	<xsl:param name="paramEmisorWebSite"/>
+	<xsl:param name="paramMapTaxCodes"/>
 	
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
@@ -35,7 +36,8 @@
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
 		<ECF>
-		<xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/>
+		<!-- <xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/> -->
+		<xsl:copy-of select="$paramMapTaxCodes"/>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
