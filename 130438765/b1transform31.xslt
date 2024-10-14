@@ -24,9 +24,9 @@
 	<xsl:param name="paramEmisorProvincia"/>
 	<xsl:param name="paramEmisorCorreoEmisor"/>
 	<xsl:param name="paramEmisorWebSite"/>
-	<xml id="book_catalog">
+	<ceo:xml id="book_catalog">
 		<catalog>hola mundo</catalog>
-	</xml>
+	</ceo:xml>
 	<xsl:template match="catalog">
 		<table class="catalog_table">
 			<xsl:copy-of select="/"/>
