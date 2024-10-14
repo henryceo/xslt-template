@@ -7,7 +7,7 @@
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-emisor.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-total.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-otra-moneda.xslt"/>
-	<maps>
+	<maps xmlns:ceo="urn:schemas-ceodo-com:xslt">
 		<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xslt"/>
 	</maps>
 
