@@ -26,6 +26,7 @@
 			</codes>
 		</data>
 	</ceo:codes>
+	 <xsl:variable name="vpDoc1" select="document('')/*/ceo:codes"/>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
@@ -51,6 +52,7 @@
 		<ECF>
 			<!-- <xsl:copy-of select="document('https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml')"/> -->
 			<xsl:copy-of select="ceo:codes"/>
+			<xsl:copy-of select="$vpDoc1"/>
 			
 			<Encabezado>
 				<Version>1.0</Version>
