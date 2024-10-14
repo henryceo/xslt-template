@@ -1,5 +1,6 @@
 <?xml version="1.0"  encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns:ceo="urn:schemas-ceo-com:xslt" xmlns:my="my:my" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
+ <xsl:strip-space elements="*"/>
 	
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tax-code.xslt"/>
 	<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/template-tipo-ingreso.xslt"/>
@@ -26,7 +27,8 @@
 			</codes>
 		</data>
 	</ceo:codes>
-	 <xsl:variable name="vpDoc1" select="ceo:codes"/>
+	
+ 	<xsl:variable name="vpDoc1" select="document('')/*/ceo:codes"/>
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
