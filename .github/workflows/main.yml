@@ -13,6 +13,6 @@ jobs:
           source_dir: 130438765
           container_name: www
           connection_string: ${{ secrets.ConnectionString }}
-          extra_args: '--pattern *.tar.gz'
+          extra_args: '--pattern *.xml'
           # WARNING: this will overwrite existing blobs in your blob storage
           overwrite: 'true'
