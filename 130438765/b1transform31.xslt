@@ -132,6 +132,7 @@
 			</Encabezado>
 			<DetallesItems>
 				<xsl:for-each select="$root/DocumentLines/DocumentLine">
+					<xsl:variable name="itemTaxcode" select="TaxCode"/>
 					<Item>
 						<NumeroLinea>
 							<xsl:value-of select="(LineNum) + 1"/>
@@ -148,7 +149,7 @@
 						<IndicadorFacturacion>
 							<!--validar proceso de mapeo de coaidos de impuesto-->
 							
-							<xsl:copy-of select="$impuestos/impuesto[1]/value"/>
+							<xsl:copy-of select="$impuestos/impuesto[./id=$itemTaxcode]/value"/>
 							
 							<!--<xsl:call-template name="taxType">
 								<xsl:with-param name="taxCode" select="TaxCode"/>
