@@ -13,6 +13,6 @@ jobs:
           source_dir: 130438765
           container_name: 130438765
           connection_string: ${{ secrets.ConnectionString }}
-          #extra_args: '--pattern *.xslt'
+          extra_args: '--pattern *.xsl'
           # WARNING: this will overwrite existing blobs in your blob storage
           overwrite: 'true'
