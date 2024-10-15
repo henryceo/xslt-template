@@ -4,7 +4,6 @@
 		<xsl:variable name="impuestos" select="/root/impuestos"/>
 		<xsl:variable name="articulos" select="/root/DocumentLines/DocumentLine"/>
 		<DetallesItems>
-		<xsl:copy-of select="/*"/>
 			<xsl:for-each select="$articulos">
 				<xsl:variable name="itemTaxcode" select="TaxCode"/>
 				<Item>
