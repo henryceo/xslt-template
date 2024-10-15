@@ -3,6 +3,7 @@
 	<xsl:template match="/" name="template-articulo">
 		<xsl:variable name="impuestos" select="root/impuestos"/>
 		<DetallesItems>
+		<xsl:copy-of select="/*"/>
 			<xsl:for-each select="/DocumentLines/DocumentLine">
 				<xsl:variable name="itemTaxcode" select="TaxCode"/>
 				<Item>
