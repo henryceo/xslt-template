@@ -6,7 +6,6 @@
 	<xsl:include href="template-emisor.xslt"/>
 	<xsl:include href="template-total.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
-	<xsl:include href="template-otra-moneda.xslt"/>
 	<xsl:include href="template-articulo.xslt"/>
 
 	<!--<xsl:include href="mapeo-test.xml"/>
