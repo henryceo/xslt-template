@@ -6,13 +6,16 @@
 	<xsl:include href="template-emisor.xslt"/>
 	<xsl:include href="template-total.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
+	<xsl:include href="template-otra-moneda.xslt"/>
+	<xsl:include href="template-articulo.xslt"/>
+
 	<!--<xsl:include href="mapeo-test.xml"/>
 						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
 						<xsl:include href="130438765/template-tax-code.xslt"/>
 						<xsl:include href="130438765/template-currency.xslt"/>-->
 	
 	<!--<xsl:variable name="vpDoc1" select="msxsl:node-set($vrtfvpDoc1)"/>-->
-
+	
 	<xsl:param name="paramEmisorRNCEmisor"/>
 	<xsl:param name="paramEmisorRazonSocialEmisor"/>
 	<xsl:param name="paramEmisorNombreComercial"/>
@@ -130,56 +133,8 @@
 				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
-			<DetallesItems>
-				<xsl:for-each select="$root/DocumentLines/DocumentLine">
-					<xsl:variable name="itemTaxcode" select="TaxCode"/>
-					<Item>
-						<NumeroLinea>
-							<xsl:value-of select="(LineNum) + 1"/>
-						</NumeroLinea>
-						<TablaCodigosItem>
-							<CodigosItem>
-								<!--validar campo TipoCodigo-->
-								<TipoCodigo>INTERNA</TipoCodigo>
-								<CodigoItem>
-									<xsl:value-of select="ItemCode"/>
-								</CodigoItem>
-							</CodigosItem>
-						</TablaCodigosItem>
-						<IndicadorFacturacion>
-							<!--validar proceso de mapeo de coaidos de impuesto-->
-							
-							<xsl:copy-of select="$impuestos/impuesto[./id=$itemTaxcode]/value"/>
-							
-							<!--<xsl:call-template name="taxType">
-								<xsl:with-param name="taxCode" select="TaxCode"/>
-								<xsl:with-param name="taxField" select="value"/>
-							</xsl:call-template>-->
-						</IndicadorFacturacion>
-						<NombreItem>
-							<xsl:value-of select="ItemDescription"/>
-						</NombreItem>
-						<IndicadorBienoServicio>2</IndicadorBienoServicio>
-						<CantidadItem>
-							<xsl:value-of select="Quantity"/>
-						</CantidadItem>
-						<PrecioUnitarioItem>
-							<xsl:value-of select="LineTotal div Quantity"/>
-						</PrecioUnitarioItem>
-						<OtraMonedaDetalle>
-							<PrecioOtraMoneda>
-								<xsl:value-of select="UnitPrice"/>
-							</PrecioOtraMoneda>
-							<MontoItemOtraMoneda>
-								<xsl:value-of select="RowTotalFC"/>
-							</MontoItemOtraMoneda>
-						</OtraMonedaDetalle>
-						<MontoItem>
-							<xsl:value-of select="LineTotal"/>
-						</MontoItem>
-					</Item>
-				</xsl:for-each>
-			</DetallesItems>
+			
+			<xsl:call-template name="template-articulo" />
 		</ECF>
 	</xsl:template>
 	<xsl:template name="formatFecha">
