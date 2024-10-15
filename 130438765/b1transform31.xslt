@@ -1,7 +1,6 @@
 <?xml version="1.0"  encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
 	
-	<xsl:include href="template-tax-code.xslt"/>
 	<xsl:include href="template-tipo-ingreso.xslt"/>
 	<xsl:include href="template-tipo-moneda.xslt"/>
 	<xsl:include href="template-emisor.xslt"/>
