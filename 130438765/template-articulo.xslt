@@ -1,8 +1,8 @@
 <?xml version="1.0"  encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:template match="/" name="template-articulo">
-		<xsl:variable name="impuestos" select="/root/impuestos"/>
-		<xsl:variable name="articulos" select="/root/DocumentLines/DocumentLine"/>
+	<xsl:template match="/root" name="template-articulo">
+		<xsl:variable name="impuestos" select="/impuestos"/>
+		<xsl:variable name="articulos" select="/DocumentLines/DocumentLine"/>
 		<DetallesItems>
 			<xsl:for-each select="$articulos">
 				<xsl:variable name="itemTaxcode" select="TaxCode"/>
