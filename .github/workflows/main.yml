@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          source_dir: 130438765
+          source_dir: _dist
           container_name: 130438765
           connection_string: ${{ secrets.ConnectionString }}
           extra_args: '--pattern *.xslt'
