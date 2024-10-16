@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:template match="/" name="templateEmisor">
-        
+        <xsl:param name="paramNumeroFacturaInterna"/>
+        <xsl:param name="paramFechaEmision"/>
         <xsl:variable name="company" select="/root/MappingTables/Company"/>
         
         <xsl:variable name="rNCEmisor" select="$company/rnc"/>
@@ -13,8 +14,7 @@
         <xsl:variable name="provincia" select="$company/provincia"/>
         <xsl:variable name="correoEmisor" select="$company/correoEmisor"/>
         <xsl:variable name="webSite" select="$company/webSite"/>
-        <xsl:param name="paramNumeroFacturaInterna"/>
-        <xsl:param name="paramFechaEmision"/>
+        
         <xsl:copy-of select="TaxCodes"/>
         <xsl:if test="$rNCEmisor"><RNCEmisor><xsl:value-of select="$rNCEmisor"/></RNCEmisor></xsl:if>
         <xsl:if test="$razonSocialEmisor"><RazonSocialEmisor><xsl:value-of select="$razonSocialEmisor"/></RazonSocialEmisor></xsl:if>

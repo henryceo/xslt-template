@@ -7,7 +7,7 @@
 	<xsl:include href="template-total.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
-
+	
 	<!--<xsl:include href="mapeo-test.xml"/>
 						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
 						<xsl:include href="130438765/template-tax-code.xslt"/>
@@ -25,7 +25,6 @@
 		<xsl:variable name="address" select="root/Address"/>
 		<xsl:variable name="cardCode" select="root/CardCode"/>
 		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
-		<xsl:variable name="impuestos" select="root/impuestos"/>
 		<ECF>
 			<Encabezado>
 				<Version>1.0</Version>
@@ -70,7 +69,8 @@
 						<xsl:with-param name="paramFechaEmision">
 							<xsl:call-template name="formatFecha">
 								<xsl:with-param name="fechaISO" select="$document/DocDate"/>
-							</xsl:call-template></xsl:with-param>
+							</xsl:call-template>
+						</xsl:with-param>
 					</xsl:call-template>
 				</Emisor>
 				<Comprador>
@@ -90,22 +90,22 @@
 				<!--validar los valores tomado del documento-->
 				<Totales>
 					<xsl:call-template name="templateTotal">
-						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
-						<xsl:with-param name="paramDocTotal" select="$root/DocTotal"/>
-						<xsl:with-param name="paramVatSum" select="$root/VatSum"/>
+						<xsl:with-param name="paramDocumentLines" select="$document/DocumentLines"/>
+						<xsl:with-param name="paramDocTotal" select="$document/DocTotal"/>
+						<xsl:with-param name="paramVatSum" select="$document/VatSum"/>
 					</xsl:call-template>
 				</Totales>
 				<OtraMoneda>
 					<xsl:call-template name="templateOtraMoneda">
-						<xsl:with-param name="paramDocumentLines" select="$root/DocumentLines"/>
-						<xsl:with-param name="paramDocRate" select="$root/DocRate"/>
+						<xsl:with-param name="paramDocumentLines" select="$document/DocumentLines"/>
+						<xsl:with-param name="paramDocRate" select="$document/DocRate"/>
 						<xsl:with-param name="paramDocCurrency">
 							<xsl:call-template name="templateTipoMoneda">
-								<xsl:with-param name="paramCode" select="$root/DocCurrency"/>
+								<xsl:with-param name="paramCode" select="$document/DocCurrency"/>
 							</xsl:call-template>
 						</xsl:with-param>
-						<xsl:with-param name="paramVatSumFc" select="$root/VatSumFc"/>
-						<xsl:with-param name="paramDocTotalFc" select="$root/DocTotalFc"/>
+						<xsl:with-param name="paramVatSumFc" select="$document/VatSumFc"/>
+						<xsl:with-param name="paramDocTotalFc" select="$document/DocTotalFc"/>
 					</xsl:call-template>
 				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
