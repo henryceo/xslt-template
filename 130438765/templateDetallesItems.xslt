@@ -21,7 +21,7 @@
 				</TablaCodigosItem>
 				<IndicadorFacturacion>
 					<!--validar proceso de mapeo de coaidos de impuesto-->
-					<xsl:value-of select="$taxCodes/TaxCode[./id=$itemTaxcode]/value"/>
+					<xsl:value-of select="$taxCodes/TaxCode[./Code=$itemTaxcode]/value"/>
 				</IndicadorFacturacion>
 				<NombreItem>
 					<xsl:value-of select="ItemDescription"/>
