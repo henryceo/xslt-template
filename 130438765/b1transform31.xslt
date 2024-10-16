@@ -16,12 +16,10 @@
 	<!--<xsl:variable name="vpDoc1" select="msxsl:node-set($vrtfvpDoc1)"/>-->
 	
 	<xsl:template match="/">
-		<xsl:variable name="root" select="root"/>
+		<xsl:variable name="document" select="root/Document"/>
 		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
 		<xsl:variable name="ncfValidoHasta" select="root/U_NCF_ValidoHasta"/>
 		<xsl:variable name="documentInstallments" select="root/DocumentInstallments/DocumentInstallment"/>
-		<xsl:variable name="docNum" select="root/DocNum"/>
-		<xsl:variable name="docDate" select="root/DocDate"/>
 		<xsl:variable name="federalTaxID" select="root/FederalTaxID"/>
 		<xsl:variable name="cardName" select="root/CardName"/>
 		<xsl:variable name="address" select="root/Address"/>
@@ -68,10 +66,10 @@
 				</IdDoc>
 				<Emisor>
 					<xsl:call-template name="templateEmisor">
-						<xsl:with-param name="paramNumeroFacturaInterna" select="$docNum"/>
+						<xsl:with-param name="paramNumeroFacturaInterna" select="$document/DocNum"/>
 						<xsl:with-param name="paramFechaEmision">
 							<xsl:call-template name="formatFecha">
-								<xsl:with-param name="fechaISO" select="$docDate"/>
+								<xsl:with-param name="fechaISO" select="$document/DocDate"/>
 							</xsl:call-template></xsl:with-param>
 					</xsl:call-template>
 				</Emisor>
