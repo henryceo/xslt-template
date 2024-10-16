@@ -6,6 +6,7 @@
 		
 		<xsl:for-each select="$documentLines">
 			<xsl:variable name="itemTaxcode" select="TaxCode"/>
+			<xsl:copy-of select="$taxCodes"/>
 			<Item>
 				<NumeroLinea>
 					<xsl:value-of select="(LineNum) + 1"/>
@@ -21,7 +22,7 @@
 				</TablaCodigosItem>
 				<IndicadorFacturacion>
 					<!--validar proceso de mapeo de coaidos de impuesto-->
-					<xsl:value-of select="$taxCodes/TaxCode[./Code=$itemTaxcode]/value"/>
+					<xsl:value-of select="$taxCodes[./Code=$itemTaxcode]/value"/>
 				</IndicadorFacturacion>
 				<NombreItem>
 					<xsl:value-of select="ItemDescription"/>
