@@ -6,7 +6,7 @@
 	<xsl:include href="template-emisor.xslt"/>
 	<xsl:include href="template-total.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
-	<xsl:include href="template-articulo.xslt"/>
+	<xsl:include href="templateDetallesItems.xslt"/>
 
 	<!--<xsl:include href="mapeo-test.xml"/>
 						<xsl:include href="https://raw.githubusercontent.com/henryceo/xslt-template/main/130438765/mapeo-test.xml"/>
@@ -132,8 +132,9 @@
 				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
-			
-			<xsl:call-template name="template-articulo" />
+			<DetallesItems>
+				<xsl:call-template name="templateDetallesItems" />
+			</DetallesItems>
 		</ECF>
 	</xsl:template>
 	<xsl:template name="formatFecha">
