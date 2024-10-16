@@ -17,27 +17,22 @@
 	
 	<xsl:template match="/">
 		<xsl:variable name="document" select="root/Document"/>
-		<xsl:variable name="tipoeCF" select="root/U_NCF"/>
-		<xsl:variable name="ncfValidoHasta" select="root/U_NCF_ValidoHasta"/>
-		<xsl:variable name="documentInstallments" select="root/DocumentInstallments/DocumentInstallment"/>
-		<xsl:variable name="federalTaxID" select="root/FederalTaxID"/>
-		<xsl:variable name="cardName" select="root/CardName"/>
-		<xsl:variable name="address" select="root/Address"/>
-		<xsl:variable name="cardCode" select="root/CardCode"/>
-		<xsl:variable name="tipoIngreso" select="root/DocObjectCode"/>
+		<xsl:variable name="tipoeCF" select="$document/U_NCF"/>
+		<xsl:variable name="documentInstallments" select="$document/DocumentInstallments/DocumentInstallment"/>
+		<xsl:variable name="tipoIngreso" select="$document/DocObjectCode"/>
 		<ECF>
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
 					<TipoeCF>
-						<xsl:value-of select="substring($tipoeCF,2,2)"/>
+						<xsl:value-of select="substring($tipoeCF/U_NCF,2,2)"/>
 					</TipoeCF>
 					<eNCF>
 						<xsl:value-of select="$tipoeCF"/>
 					</eNCF>
 					<FechaVencimientoSecuencia>
 						<xsl:call-template name="formatFecha">
-							<xsl:with-param name="fechaISO" select="$ncfValidoHasta"/>
+							<xsl:with-param name="fechaISO" select="$document/U_NCF_ValidoHasta"/>
 						</xsl:call-template>
 					</FechaVencimientoSecuencia>
 					<IndicadorMontoGravado>0</IndicadorMontoGravado>
@@ -74,18 +69,10 @@
 					</xsl:call-template>
 				</Emisor>
 				<Comprador>
-					<RNCComprador>
-						<xsl:value-of select="$federalTaxID"/>
-					</RNCComprador>
-					<RazonSocialComprador>
-						<xsl:value-of select="$cardName"/>
-					</RazonSocialComprador>
-					<DireccionComprador>
-						<xsl:value-of select="$address"/>
-					</DireccionComprador>
-					<CodigoInternoComprador>
-						<xsl:value-of select="$cardCode"/>
-					</CodigoInternoComprador>
+					<RNCComprador><xsl:value-of select="$document/FederalTaxID"/></RNCComprador>
+					<RazonSocialComprador><xsl:value-of select="$document/CardName"/></RazonSocialComprador>
+					<DireccionComprador><xsl:value-of select="$document/Address"/></DireccionComprador>
+					<CodigoInternoComprador><xsl:value-of select="$document/CardCode"/></CodigoInternoComprador>
 				</Comprador>
 				<!--validar los valores tomado del documento-->
 				<Totales>
@@ -121,9 +108,5 @@
 		<xsl:variable name="mes" select="substring($fechaISO, 6, 2)"/>
 		<xsl:variable name="dia" select="substring($fechaISO, 9, 2)"/>
 		<xsl:value-of select="concat($dia, '-', $mes, '-', $anio)"/>
-	</xsl:template>
-	<!-- templateTotal -->
-	
-	<xsl:template name="data">
 	</xsl:template>
 </xsl:stylesheet>
