@@ -3,7 +3,7 @@
 	
 	<xsl:include href="template-tipo-ingreso.xslt"/>
 	<xsl:include href="template-tipo-moneda.xslt"/>
-	<xsl:include href="template-emisor.xslt"/>
+	<xsl:include href="templateEmisor.xslt"/>
 	<xsl:include href="template-total.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
@@ -14,16 +14,6 @@
 						<xsl:include href="130438765/template-currency.xslt"/>-->
 	
 	<!--<xsl:variable name="vpDoc1" select="msxsl:node-set($vrtfvpDoc1)"/>-->
-	
-	<xsl:param name="paramEmisorRNCEmisor"/>
-	<xsl:param name="paramEmisorRazonSocialEmisor"/>
-	<xsl:param name="paramEmisorNombreComercial"/>
-	<xsl:param name="paramEmisorSucursal"/>
-	<xsl:param name="paramEmisorDireccionEmisor"/>
-	<xsl:param name="paramEmisorMunicipio"/>
-	<xsl:param name="paramEmisorProvincia"/>
-	<xsl:param name="paramEmisorCorreoEmisor"/>
-	<xsl:param name="paramEmisorWebSite"/>
 	
 	<xsl:template match="/">
 		<xsl:variable name="root" select="root"/>
@@ -78,16 +68,6 @@
 				</IdDoc>
 				<Emisor>
 					<xsl:call-template name="templateEmisor">
-						
-						<xsl:with-param name="paramRNCEmisor" select="$paramEmisorRNCEmisor"/>
-						<xsl:with-param name="paramRazonSocialEmisor" select="$paramEmisorRazonSocialEmisor"/>
-						<xsl:with-param name="paramNombreComercial" select="$paramEmisorNombreComercial"/>
-						<xsl:with-param name="paramSucursal" select="$paramEmisorSucursal"/>
-						<xsl:with-param name="paramDireccionEmisor" select="$paramEmisorDireccionEmisor"/>
-						<xsl:with-param name="paramMunicipio" select="$paramEmisorMunicipio"/>
-						<xsl:with-param name="paramProvincia" select="$paramEmisorProvincia"/>
-						<xsl:with-param name="paramCorreoEmisor" select="$paramEmisorCorreoEmisor"/>
-						<xsl:with-param name="paramWebSite" select="$paramEmisorWebSite"/>
 						<xsl:with-param name="paramNumeroFacturaInterna" select="$docNum"/>
 						<xsl:with-param name="paramFechaEmision">
 							<xsl:call-template name="formatFecha">
