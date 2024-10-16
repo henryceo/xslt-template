@@ -24,12 +24,8 @@
 			<Encabezado>
 				<Version>1.0</Version>
 				<IdDoc>
-					<TipoeCF>
-						<xsl:value-of select="substring($tipoeCF/U_NCF,2,2)"/>
-					</TipoeCF>
-					<eNCF>
-						<xsl:value-of select="$tipoeCF"/>
-					</eNCF>
+					<TipoeCF><xsl:value-of select="substring($tipoeCF,2,2)"/></TipoeCF>
+					<eNCF><xsl:value-of select="$tipoeCF"/></eNCF>
 					<FechaVencimientoSecuencia>
 						<xsl:call-template name="formatFecha">
 							<xsl:with-param name="fechaISO" select="$document/U_NCF_ValidoHasta"/>
