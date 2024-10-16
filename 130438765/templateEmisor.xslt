@@ -12,7 +12,7 @@
         <xsl:variable name="webSite"/>-->
         <xsl:param name="paramNumeroFacturaInterna"/>
         <xsl:param name="paramFechaEmision"/>
-        <xsl:copy-of select="/TaxCodes"/>
+        <xsl:copy-of select="TaxCodes"/>
         <!--<xsl:if test="$rNCEmisor"><RNCEmisor><xsl:value-of select="$rNCEmisor"/></RNCEmisor></xsl:if>
         <xsl:if test="$razonSocialEmisor"><RazonSocialEmisor><xsl:value-of select="$razonSocialEmisor"/></RazonSocialEmisor></xsl:if>
         <xsl:if test="$nombreComercial"><NombreComercial><xsl:value-of select="$nombreComercial"/></NombreComercial></xsl:if>
