@@ -1,7 +1,7 @@
 <?xml version="1.0"  encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 	<xsl:template match="/" name="templateDetallesItems">
-		<xsl:variable name="taxCodes" select="/root/MappingTables/TaxCodes"/>
+		<xsl:variable name="taxCodes" select="/root/MappingTables/TaxCodes/TaxCode"/>
 		<xsl:variable name="documentLines" select="/root/Document/DocumentLines/DocumentLine"/>
 		
 		<xsl:for-each select="$documentLines">
