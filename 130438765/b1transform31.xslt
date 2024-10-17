@@ -48,7 +48,6 @@
 				</IdDoc>
 				<Emisor>
 					<xsl:call-template name="templateEmisor">
-						<xsl:with-param name="paramNumeroFacturaInterna" select="$document/DocNum"/>
 						<xsl:with-param name="paramFechaEmision">
 							<xsl:call-template name="formatFecha">
 								<xsl:with-param name="fechaISO" select="$document/DocDate"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:template match="/" name="templateEmisor">
-        <xsl:param name="paramNumeroFacturaInterna"/>
         <xsl:param name="paramFechaEmision"/>
+        
         <xsl:variable name="company" select="/root/MappingTables/Company"/>
         
         <xsl:variable name="rNCEmisor" select="$company/rnc"/>
@@ -14,6 +14,8 @@
         <xsl:variable name="provincia" select="$company/provincia"/>
         <xsl:variable name="correoEmisor" select="$company/correoEmisor"/>
         <xsl:variable name="webSite" select="$company/webSite"/>
+        <xsl:variable name="numeroFacturaInterna" select="/root/Document/DocNum"/>
+        
         
         <xsl:copy-of select="TaxCodes"/>
         <xsl:if test="$rNCEmisor"><RNCEmisor><xsl:value-of select="$rNCEmisor"/></RNCEmisor></xsl:if>
@@ -25,7 +27,7 @@
         <xsl:if test="$provincia"><Provincia><xsl:value-of select="$provincia"/></Provincia></xsl:if>
         <xsl:if test="$correoEmisor"><CorreoEmisor><xsl:value-of select="$correoEmisor"/></CorreoEmisor></xsl:if>
         <xsl:if test="$webSite"><WebSite><xsl:value-of select="$webSite"/></WebSite></xsl:if>
-        <xsl:if test="$paramNumeroFacturaInterna"><NumeroFacturaInterna><xsl:value-of select="$paramNumeroFacturaInterna"/></NumeroFacturaInterna></xsl:if>
+        <xsl:if test="$numeroFacturaInterna"><NumeroFacturaInterna><xsl:value-of select="$numeroFacturaInterna"/></NumeroFacturaInterna></xsl:if>
         <xsl:if test="$paramFechaEmision"><FechaEmision><xsl:value-of select="$paramFechaEmision"/></FechaEmision></xsl:if>
     </xsl:template>
 </xsl:stylesheet>
