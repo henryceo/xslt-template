@@ -2,10 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 	
 	<xsl:include href="template-tipo-ingreso.xslt"/>
-	<xsl:include href="template-tipo-moneda.xslt"/>
 	<xsl:include href="templateEmisor.xslt"/>
 	<xsl:include href="templateTotales.xslt"/>
-	<xsl:include href="template-otra-moneda.xslt"/>
+	<xsl:include href="templateOtraMoneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
 	
 	<xsl:template match="/">
@@ -68,17 +67,7 @@
 					<xsl:call-template name="templateTotales" />
 				</Totales>
 				<OtraMoneda>
-					<xsl:call-template name="templateOtraMoneda">
-						<xsl:with-param name="paramDocumentLines" select="$document/DocumentLines"/>
-						<xsl:with-param name="paramDocRate" select="$document/DocRate"/>
-						<xsl:with-param name="paramDocCurrency">
-							<xsl:call-template name="templateTipoMoneda">
-								<xsl:with-param name="paramCode" select="$document/DocCurrency"/>
-							</xsl:call-template>
-						</xsl:with-param>
-						<xsl:with-param name="paramVatSumFc" select="$document/VatSumFc"/>
-						<xsl:with-param name="paramDocTotalFc" select="$document/DocTotalFc"/>
-					</xsl:call-template>
+					<xsl:call-template name="templateOtraMoneda"/>
 				</OtraMoneda>
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
