@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:template match="/" name="templateTotales">
         <xsl:variable name="document" select="/root/Document"/>
-
+        
         <xsl:variable name="documentLines" select="$document/DocumentLines"/>
         <xsl:variable name="docTotal" select="$document/DocTotal"/>
         <xsl:variable name="vatSum" select="$document/VatSum"/>
@@ -11,8 +11,9 @@
         <MontoGravadoTotal><xsl:value-of select="sum($documentLines/DocumentLine[TaxTotal>0]/LineTotal)"/></MontoGravadoTotal>
         
         <xsl:for-each select="$taxCodes/TaxCode">
+            <xsl:sort select="Value"/>
             <xsl:variable name="code"><xsl:value-of select="./Code"/></xsl:variable>
-
+            
             <xsl:if test="./Value = 1 and count($documentLines/DocumentLine[TaxCode=$code]) > 0">
                 <MontoGravadoI1><xsl:value-of select="sum($documentLines/DocumentLine[TaxCode=$code]/LineTotal)"/></MontoGravadoI1>
             </xsl:if>
@@ -23,8 +24,9 @@
                 <MontoExento><xsl:value-of select="sum($documentLines/DocumentLine[TaxCode=$code]/LineTotal)"/></MontoExento>
             </xsl:if>
         </xsl:for-each>
-
+        
         <xsl:for-each select="$taxCodes/TaxCode">
+            <xsl:sort select="Value"/>
             <xsl:variable name="code"><xsl:value-of select="./Code"/></xsl:variable>
             <xsl:if test="./Value = 1 and count($documentLines/DocumentLine[TaxCode=$code]) > 0">
                 <ITBIS1><xsl:value-of select="./TaxRate"/></ITBIS1>
@@ -35,8 +37,9 @@
         </xsl:for-each>
         
         <TotalITBIS><xsl:value-of select="$vatSum"/></TotalITBIS>
-
+        
         <xsl:for-each select="$taxCodes/TaxCode">
+            <xsl:sort select="Value"/>
             <xsl:variable name="code"><xsl:value-of select="./Code"/></xsl:variable>
             <xsl:if test="./Value = 1 and count($documentLines/DocumentLine[TaxCode=$code]) > 0">
                 <TotalITBIS1><xsl:value-of select="$documentLines/DocumentLine[TaxCode=$code]/TaxTotal"/></TotalITBIS1>
