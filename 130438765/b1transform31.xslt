@@ -4,7 +4,7 @@
 	<xsl:include href="template-tipo-ingreso.xslt"/>
 	<xsl:include href="template-tipo-moneda.xslt"/>
 	<xsl:include href="templateEmisor.xslt"/>
-	<xsl:include href="template-total.xslt"/>
+	<xsl:include href="templateTotales.xslt"/>
 	<xsl:include href="template-otra-moneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
 	
@@ -65,11 +65,7 @@
 				</Comprador>
 				<!--validar los valores tomado del documento-->
 				<Totales>
-					<xsl:call-template name="templateTotal">
-						<xsl:with-param name="paramDocumentLines" select="$document/DocumentLines"/>
-						<xsl:with-param name="paramDocTotal" select="$document/DocTotal"/>
-						<xsl:with-param name="paramVatSum" select="$document/VatSum"/>
-					</xsl:call-template>
+					<xsl:call-template name="templateTotales" />
 				</Totales>
 				<OtraMoneda>
 					<xsl:call-template name="templateOtraMoneda">

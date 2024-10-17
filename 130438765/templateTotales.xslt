@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
-<xsl:template name="templateTotal">
-		<xsl:param name="paramDocumentLines"/>
-		<xsl:param name="paramDocTotal"/>
-        <xsl:param name="paramVatSum"/>
+<xsl:template match="/" name="templateTotales">
+        
+        <xsl:variable name="documentLines" select="/root/Document/DocumentLines/DocumentLine"/>
+        <xsl:variable name="docTotal" select="/root/Document/DocTotal"/>
+        <xsl:variable name="vatSum" select="/root/Document/VatSum"/>
 
-		<xsl:param name="taxField"/>
 		<xsl:variable name="taxs">
 			<TaxCode>
 				<tax>
@@ -41,40 +41,40 @@
 		</xsl:variable>
 
 		
-		<MontoGravadoTotal><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxTotal>0]/LineTotal)"/></MontoGravadoTotal>
+		<MontoGravadoTotal><xsl:value-of select="sum($documentLines/DocumentLine[TaxTotal>0]/LineTotal)"/></MontoGravadoTotal>
 
         <xsl:for-each select="msxsl:node-set($taxs)/TaxCode/tax">
 			<xsl:variable name="id"><xsl:value-of select="./id"/></xsl:variable>
-            <xsl:if test="./value = 1 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
-                <MontoGravadoI1><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoGravadoI1>
+            <xsl:if test="./value = 1 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
+                <MontoGravadoI1><xsl:value-of select="sum($documentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoGravadoI1>
             </xsl:if>
-            <xsl:if test="./value = 2 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
-                <MontoGravadoI2><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoGravadoI2>
+            <xsl:if test="./value = 2 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
+                <MontoGravadoI2><xsl:value-of select="sum($documentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoGravadoI2>
             </xsl:if>
-            <xsl:if test="./value = 4 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
-                <MontoExento><xsl:value-of select="sum($paramDocumentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoExento>
+            <xsl:if test="./value = 4 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
+                <MontoExento><xsl:value-of select="sum($documentLines/DocumentLine[TaxCode=$id]/LineTotal)"/></MontoExento>
             </xsl:if>
 		</xsl:for-each>
         <xsl:for-each select="msxsl:node-set($taxs)/TaxCode/tax">
 			<xsl:variable name="id"><xsl:value-of select="./id"/></xsl:variable>
-            <xsl:if test="./value = 1 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
+            <xsl:if test="./value = 1 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
                 <ITBIS1><xsl:value-of select="./tasa"/></ITBIS1>
             </xsl:if>
-            <xsl:if test="./value = 2 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
+            <xsl:if test="./value = 2 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
                 <ITBIS2><xsl:value-of select="./tasa"/></ITBIS2>
             </xsl:if>
 		</xsl:for-each>
-        <TotalITBIS><xsl:value-of select="$paramVatSum"/></TotalITBIS>
+        <TotalITBIS><xsl:value-of select="$vatSum"/></TotalITBIS>
         <xsl:for-each select="msxsl:node-set($taxs)/TaxCode/tax">
 			<xsl:variable name="id"><xsl:value-of select="./id"/></xsl:variable>
-            <xsl:if test="./value = 1 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
-                <TotalITBIS1><xsl:value-of select="$paramDocumentLines/DocumentLine[TaxCode=$id]/TaxTotal"/></TotalITBIS1>
+            <xsl:if test="./value = 1 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
+                <TotalITBIS1><xsl:value-of select="$documentLines/DocumentLine[TaxCode=$id]/TaxTotal"/></TotalITBIS1>
             </xsl:if>
-            <xsl:if test="./value = 2 and count($paramDocumentLines/DocumentLine[TaxCode=$id]) > 0">
-                <TotalITBIS2><xsl:value-of select="$paramDocumentLines/DocumentLine[TaxCode=$id]/TaxTotal"/></TotalITBIS2>
+            <xsl:if test="./value = 2 and count($documentLines/DocumentLine[TaxCode=$id]) > 0">
+                <TotalITBIS2><xsl:value-of select="$documentLines/DocumentLine[TaxCode=$id]/TaxTotal"/></TotalITBIS2>
         </xsl:if>
 		</xsl:for-each>
-	    <MontoTotal><xsl:value-of select="$paramDocTotal"/></MontoTotal>
+	    <MontoTotal><xsl:value-of select="$docTotal"/></MontoTotal>
 		<!--<xsl:for-each select="msxsl:node-set($taxs)/TaxCode/tax">
 			
             <xsl:variable name="id"><xsl:value-of select="./id"/></xsl:variable>
