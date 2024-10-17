@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" version="1.0">
 <xsl:template match="/" name="templateTotales">
         
-        <xsl:variable name="documentLines" select="/root/Document/DocumentLines/DocumentLine"/>
+        <xsl:variable name="documentLines" select="/root/Document/DocumentLines"/>
         <xsl:variable name="docTotal" select="/root/Document/DocTotal"/>
         <xsl:variable name="vatSum" select="/root/Document/VatSum"/>
 
