@@ -9,6 +9,7 @@
 	
 
 	<xsl:include href="templateDetallesItems.xslt"/>
+	<xsl:include href="templateDetallesItems.xslt"/>
 
 
 
