@@ -35,5 +35,4 @@ jobs:
       - name: JV-output
         uses: actions/checkout@v3
         with:
-          result-encoding: string
           run: echo "${{ steps.get-folder.outputs }}"
