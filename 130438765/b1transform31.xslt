@@ -7,7 +7,6 @@
 	<xsl:include href="templateOtraMoneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
 	
-	<xsl:include href="templateDetallesItems.xslt"/>
 
 
 	<xsl:template match="/">
