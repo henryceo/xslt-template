@@ -33,4 +33,6 @@ jobs:
           result-encoding: string
           script: return "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0]
       - name: JV-output
-        run: echo "${{ steps.get-folder.outputs }}"
+        run: | 
+          echo  "${{ steps.get-folder.outputs }}"
+          echo  "${{ steps.concat-changed-files.outputs.changed_files }}"
