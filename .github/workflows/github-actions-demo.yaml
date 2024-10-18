@@ -24,12 +24,7 @@ jobs:
           echo "Diff commit:"
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
       - name: Get changed files
-        id: changed--files
+        id: concat-changed-files
         run: echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
-      - name: Get output changed files
-        run: echo "${{ steps.changed--files.outputs.changed_files[0] }}"
-      
-      - name: JV
-        uses: actions/github-script@v7
-        with:
-          script: console.log("${{ steps.changed--files.outputs.changed_files }}".split('/')[0])
+      - name: JV-output
+        run: echo "${{ steps.concat-changed-files.outputs.changed_files }}" | cut -d'/' -f1
