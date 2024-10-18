@@ -18,8 +18,7 @@ jobs:
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
       - name: Get changed files
         id: concat-changed-files
-        run: echo | 
-          "changed_files=tes$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | cut -d'/' -f1 | xargs)" >> $GITHUB_OUTPUT
+        run: echo "changed_files=tes$((git diff --name-only ${{ github.event.before }} ${{ github.event.after }}) | cut -d'/' -f1 | xargs)" >> $GITHUB_OUTPUT
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
           source_dir: ${{ steps.concat-changed-files.outputs.changed_files }}
