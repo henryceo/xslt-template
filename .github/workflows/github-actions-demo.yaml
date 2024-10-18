@@ -16,7 +16,6 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: List files
       - run: |
           for file in ${{ steps.changed-files.outputs.changed_files }}; do
             echo "$file was changed"
