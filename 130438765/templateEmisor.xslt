@@ -16,6 +16,8 @@
         <xsl:variable name="webSite" select="$company/webSite"/>
         <xsl:variable name="numeroFacturaInterna" select="/root/Document/DocNum"/>
         
+        <xsl:variable name="numeroFacturaInterna" select="/root/Document/DocNum"/>
+        
         
         <xsl:copy-of select="TaxCodes"/>
         <xsl:if test="$rNCEmisor"><RNCEmisor><xsl:value-of select="$rNCEmisor"/></RNCEmisor></xsl:if>
