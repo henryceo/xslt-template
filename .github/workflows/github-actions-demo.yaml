@@ -35,4 +35,4 @@ jobs:
       - name: JV-output
         run: | 
           echo  "${{ steps.get-folder.outputs }}"
-          echo  "${{ steps.concat-changed-files.outputs.changed_files }}"
+          echo  "${{ steps.concat-changed-files.outputs.split('/')[0] }}"
