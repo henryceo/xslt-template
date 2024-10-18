@@ -31,8 +31,9 @@ jobs:
         id: get-folder
         with:
           result-encoding: string
-          script: return "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0]
+          script: | 
+            file = "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0] >> $GITHUB_OUTPUT
       - name: JV-output
         run: | 
           echo  "${{ steps.get-folder.outputs }}"
-          echo  "${{ steps.concat-changed-files.outputs.split('/')[0] }}"
+          echo  "${{ steps.get-folder.outputs.file }}"
