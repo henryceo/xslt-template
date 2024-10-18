@@ -31,7 +31,5 @@ jobs:
       
       - name: JV
         uses: actions/github-script@v7
-        id: my-script
         with:
-          result-encoding: string
-          script: return "I will be string (not JSON) encoded!"
+          script: console.log(context)
