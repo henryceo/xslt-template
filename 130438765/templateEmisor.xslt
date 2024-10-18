@@ -15,7 +15,6 @@
         <xsl:variable name="correoEmisor" select="$company/correoEmisor"/>
         <xsl:variable name="webSite" select="$company/webSite"/>
         <xsl:variable name="numeroFacturaInterna" select="/root/Document/DocNum"/>
-        <xsl:variable name="numeroFacturaInterna" select="/root/Document/DocNum"/>
         
         
         <xsl:copy-of select="TaxCodes"/>
