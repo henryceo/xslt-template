@@ -32,5 +32,5 @@ jobs:
       # Get list of changed files
       - name: Get list of changed files
         id: changed-files
-        run: |
-          echo git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
+        run: | 
+          git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
