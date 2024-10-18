@@ -7,6 +7,7 @@
 	<xsl:include href="templateOtraMoneda.xslt"/>
 	<xsl:include href="templateDetallesItems.xslt"/>
 	
+	
 	<xsl:template match="/">
 		<xsl:variable name="document" select="root/Document"/>
 		<xsl:variable name="tipoeCF" select="$document/U_NCF"/>
