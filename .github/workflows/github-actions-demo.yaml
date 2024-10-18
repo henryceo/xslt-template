@@ -24,12 +24,16 @@ jobs:
           echo "Diff commit:"
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
       - name: Get changed files
-        id: changed--files
+        id: concat-changed-files
         run: echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
-      - name: Get output changed files
-        run: echo "${{ steps.changed--files.outputs.changed_files[0] }}"
-      
       - name: JV
         uses: actions/github-script@v7
+        id: get-folder
         with:
-          script: console.log("${{ steps.changed--files.outputs.changed_files }}".split('/')[0])
+          result-encoding: string
+          script: return "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0]
+      - name: JV-output
+        uses: actions/checkout@v3
+        with:
+          result-encoding: string
+          run: echo "${{ steps.get-folder.outputs }}"
