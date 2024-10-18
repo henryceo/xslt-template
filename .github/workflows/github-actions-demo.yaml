@@ -26,3 +26,8 @@ jobs:
       - name: Get changed files
         id: changed--files
         run: echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
+      - name: Get output changed files
+        run: |
+          for file in ${{ steps.changed--files.outputs.changed_files }}; do
+              echo "$file was changed"
+          done
