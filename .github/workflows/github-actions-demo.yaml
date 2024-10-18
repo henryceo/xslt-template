@@ -13,21 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Checkout the repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Fetch history for comparison
-      - name: Fetch all history for comparison
-        run: git fetch --all
-
-      # Debug: Show current branch and commit
-      - name: Show Git info
-        run: |
-          echo "Current branch:"
-          git branch --show-current
-          echo "Current commit:"
-          git log -1 --pretty=oneline
       - name: Get prepar list of changed files
         uses: actions/checkout@v3
         with:
@@ -38,3 +23,11 @@ jobs:
         run: |
           echo "Diff commit:"
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
+      - name: Get changed files
+        id: changed--files
+        run: echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
+      - name: Get output changed files
+        run: |
+          for file in ${{ steps.changed--files.outputs.changed_files }}; do
+              echo "$file was changed"
+          done
