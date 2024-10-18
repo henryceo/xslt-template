@@ -23,8 +23,8 @@ jobs:
           "dir={{'geeg/dsf.text 89465text/tesd.text' | cut -d'/' -f1}}" >> $GITHUB_OUTPUT
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          source_dir: ${{ dir }}
-          container_name: ${{ dir }}/xsl
+          source_dir: ${{ steps.concat-changed-files.outputs.dir }}
+          container_name: ${{ steps.concat-changed-files.outputs.dir }}/xsl
           connection_string: ${{ secrets.ConnectionString }}
           #extra_args: '--pattern *.xsl'
           # WARNING: this will overwrite existing blobs in your blob storage
