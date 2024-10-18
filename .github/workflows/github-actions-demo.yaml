@@ -24,3 +24,32 @@ jobs:
           git fetch origin main          
           git diff --name-only origin/main HEAD > b1transform31.xslt
           echo "Changed files:" cat b1transform31.xslt
+  list-changed-folders:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Get the list of changed files
+      - name: Get list of changed files
+        id: changed-files
+        run: |
+          git fetch origin main
+          git diff --name-only origin/main HEAD > changed_files.txt
+          echo "Changed files:"
+          cat changed_files.txt
+
+      # Extract changed directories
+      - name: Extract changed directories
+        id: changed-dirs
+        run: |
+          cat changed_files.txt | xargs -n1 dirname | sort | uniq > changed_dirs.txt
+          echo "Changed directories:"
+          cat changed_dirs.txt
+
+      # Output changed directories
+      - name: Output changed directories
+        run: |
+          echo "The following directories were changed:"
+          cat changed_dirs.txt
