@@ -28,9 +28,12 @@ jobs:
           git branch --show-current
           echo "Current commit:"
           git log -1 --pretty=oneline
-
+      - name: Get prepar list of changed files
+        with:
+          fetch-depth: 0
       # Get list of changed files
       - name: Get list of changed files
         id: changed-files
-        run: | 
+        run: |
+          echo "Diff commit:"
           git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
