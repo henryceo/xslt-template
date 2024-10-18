@@ -1,55 +1,60 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: List Changed Folders
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: |
-          for file in ${{ steps.changed-files.outputs.changed_files }}; do
-            echo "$file was changed"
-          done
-      - run: |          
-          git fetch origin main          
-          git diff --name-only origin/main HEAD > b1transform31.xslt
-          echo "Changed files:" cat b1transform31.xslt
   list-changed-folders:
     runs-on: ubuntu-latest
+    
     steps:
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Get the list of changed files
+      # Fetch history for comparison
+      - name: Fetch all history for comparison
+        run: git fetch --all
+
+      # Debug: Show current branch and commit
+      - name: Show Git info
+        run: |
+          echo "Current branch:"
+          git branch --show-current
+          echo "Current commit:"
+          git log -1 --pretty=oneline
+
+      # Get list of changed files
       - name: Get list of changed files
         id: changed-files
         run: |
-          git fetch origin main
           git diff --name-only origin/main HEAD > changed_files.txt
-          echo "Changed files:"
-          cat changed_files.txt
+          echo "Changed files (if any):"
+          cat changed_files.txt || echo "No changed files detected."
+
+      # Check if there are any changes
+      - name: Check for changes
+        run: |
+          if [[ ! -s changed_files.txt ]]; then
+            echo "No changes detected."
+            exit 0
+          fi
 
       # Extract changed directories
       - name: Extract changed directories
         id: changed-dirs
         run: |
           cat changed_files.txt | xargs -n1 dirname | sort | uniq > changed_dirs.txt
-          echo "Changed directories:"
-          cat changed_dirs.txt
+          echo "Changed directories (if any):"
+          cat changed_dirs.txt || echo "No directories detected."
 
       # Output changed directories
       - name: Output changed directories
         run: |
-          echo "The following directories were changed:"
+          echo "The following directories were changed (if any):"
           cat changed_dirs.txt
