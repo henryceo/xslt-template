@@ -8,14 +8,6 @@
 	<xsl:include href="templateDetallesItems.xslt"/>
 	
 
-	<xsl:include href="templateDetallesItems.xslt"/>
-	<xsl:include href="templateDetallesItems.xslt"/>
-	<xsl:include href="templateDetallesItems.xslt"/>
-	<xsl:include href="templateDetallesItems.xslt"/>
-	<xsl:include href="templateDetallesItems.xslt"/>
-	<xsl:include href="templateDetallesItems.xslt"/>
-
-
 
 	<xsl:template match="/">
 		<xsl:variable name="document" select="root/Document"/>
