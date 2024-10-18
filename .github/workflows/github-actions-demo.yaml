@@ -33,29 +33,4 @@ jobs:
       - name: Get list of changed files
         id: changed-files
         run: |
-          echo ${{ github.event.before }} ${{ github.event.after }}
-          git diff --name-only origin/main HEAD > changed_files.txt
-          echo "Changed files (if any):"
-          cat changed_files.txt || echo "No changed files detected."
-
-      # Check if there are any changes
-      - name: Check for changes
-        run: |
-          if [[ ! -s changed_files.txt ]]; then
-            echo "No changes detected."
-            exit 0
-          fi
-
-      # Extract changed directories
-      - name: Extract changed directories
-        id: changed-dirs
-        run: |
-          cat changed_files.txt | xargs -n1 dirname | sort | uniq > changed_dirs.txt
-          echo "Changed directories (if any):"
-          cat changed_dirs.txt || echo "No directories detected."
-
-      # Output changed directories
-      - name: Output changed directories
-        run: |
-          echo "The following directories were changed (if any):"
-          cat changed_dirs.txt
+          echo git diff --name-only ${{ github.event.before }} ${{ github.event.after }}
