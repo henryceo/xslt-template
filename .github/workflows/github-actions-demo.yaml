@@ -16,7 +16,13 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: List files
       - run: |
           for file in ${{ steps.changed-files.outputs.changed_files }}; do
             echo "$file was changed"
           done
+      - run: |          
+          git fetch origin main          
+          git diff --name-only origin/main HEAD > changed_files.txt          
+          echo "Changed files:"          
+          cat changed_files.txt 
