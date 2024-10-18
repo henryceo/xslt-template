@@ -31,9 +31,9 @@ jobs:
         id: get-folder
         with:
           result-encoding: string
-          script: | 
-            file = "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0] >> $GITHUB_OUTPUT
+          script: return "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0] >> $GITHUB_OUTPUT
       - name: JV-output
         run: | 
           echo  "${{ steps.get-folder.outputs }}"
           echo  "${{ steps.get-folder.outputs.file }}"
+          echo 'geeg/dsf.text 89465text/tesd.text' | cut -d'/' -f1
