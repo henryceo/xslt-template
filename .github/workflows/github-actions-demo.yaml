@@ -26,14 +26,5 @@ jobs:
       - name: Get changed files
         id: concat-changed-files
         run: echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
-      - name: JV
-        uses: actions/github-script@v7
-        id: get-folder
-        with:
-          result-encoding: string
-          script: return "${{ steps.concat-changed-files.outputs.changed_files }}".split('/')[0]
       - name: JV-output
-        run: | 
-          echo  "${{ steps.get-folder.outputs }}"
-          echo  "${{ steps.get-folder.outputs.file }}"
-          echo 'geeg/dsf.text 89465text/tesd.text' | cut -d'/' -f1
+        run: echo "${{ steps.concat-changed-files.outputs.changed_files }}" | cut -d'/' -f1
