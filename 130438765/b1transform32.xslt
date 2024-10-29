@@ -20,10 +20,10 @@
 					<TipoeCF><xsl:value-of select="substring($tipoeCF,2,2)"/></TipoeCF>
 					<eNCF><xsl:value-of select="$tipoeCF"/></eNCF>
 					<!-- <FechaVencimientoSecuencia>
-						<xsl:call-template name="formatFecha">
-							<xsl:with-param name="fechaISO" select="$document/U_NCF_ValidoHasta"/>
-						</xsl:call-template>
-					</FechaVencimientoSecuencia> -->
+										<xsl:call-template name="formatFecha">
+										<xsl:with-param name="fechaISO" select="$document/U_NCF_ValidoHasta"/>
+										</xsl:call-template>
+										</FechaVencimientoSecuencia> -->
 					<IndicadorMontoGravado>0</IndicadorMontoGravado>
 					<TipoIngresos>02</TipoIngresos>
 					<!-- TODO -->
@@ -52,17 +52,17 @@
 					</xsl:call-template>
 				</Emisor>
 				<Comprador>
-					<RNCComprador>
-						<xsl:if test="$document/FederalTaxID">
+					<xsl:if test="$document/FederalTaxID != ''">
+						<RNCComprador>
 							<xsl:value-of select="$document/FederalTaxID"/>
-						</xsl:if>
-					</RNCComprador>
+						</RNCComprador>
+					</xsl:if>
 					<RazonSocialComprador><xsl:value-of select="$document/CardName"/></RazonSocialComprador>
-					<DireccionComprador>
-						<xsl:if test="$document/Address">
+					<xsl:if test="$document/Address != ''">
+						<DireccionComprador>
 							<xsl:value-of select="$document/Address"/>
-						</xsl:if>
-					</DireccionComprador>
+						</DireccionComprador>
+					</xsl:if>
 					<CodigoInternoComprador><xsl:value-of select="$document/CardCode"/></CodigoInternoComprador>
 				</Comprador>
 				<!--validar los valores tomado del documento-->
@@ -70,8 +70,8 @@
 					<xsl:call-template name="templateTotales" />
 				</Totales>
 				<!-- <OtraMoneda>
-					<xsl:call-template name="templateOtraMoneda"/>
-				</OtraMoneda> -->
+									<xsl:call-template name="templateOtraMoneda"/>
+									</OtraMoneda> -->
 				<!--validar los valores tomado del documento-->
 			</Encabezado>
 			<DetallesItems>
