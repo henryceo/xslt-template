@@ -53,13 +53,13 @@
 				</Emisor>
 				<Comprador>
 					<RNCComprador>
-						<xsl:if test="$document/FederalTaxID">
+						<xsl:if test="$document/FederalTaxID != ''">
 							<xsl:value-of select="$document/FederalTaxID"/>
 						</xsl:if>
 					</RNCComprador>
 					<RazonSocialComprador><xsl:value-of select="$document/CardName"/></RazonSocialComprador>
 					<DireccionComprador>
-						<xsl:if test="$document/Address">
+						<xsl:if test="$document/Address != ''">
 							<xsl:value-of select="$document/Address"/>
 						</xsl:if>
 					</DireccionComprador>
