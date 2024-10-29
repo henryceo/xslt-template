@@ -19,11 +19,11 @@
 				<IdDoc>
 					<TipoeCF><xsl:value-of select="substring($tipoeCF,2,2)"/></TipoeCF>
 					<eNCF><xsl:value-of select="$tipoeCF"/></eNCF>
-					<FechaVencimientoSecuencia>
+					<!-- <FechaVencimientoSecuencia>
 						<xsl:call-template name="formatFecha">
 							<xsl:with-param name="fechaISO" select="$document/U_NCF_ValidoHasta"/>
 						</xsl:call-template>
-					</FechaVencimientoSecuencia>
+					</FechaVencimientoSecuencia> -->
 					<IndicadorMontoGravado>0</IndicadorMontoGravado>
 					<TipoIngresos>02</TipoIngresos>
 					<!-- TODO -->
